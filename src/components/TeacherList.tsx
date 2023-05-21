@@ -3,8 +3,10 @@ import Error from "./Error";
 import SpinnerPage from "./SpinnerPage";
 import { TeacherCard } from "./TeacherCard";
 import { api } from "~/utils/api";
+import { useState } from "react";
 
 export const TeacherList: React.FC = () => {
+  const [searchValue, setSearchValue] = useState("");
   const { data, isLoading, refetch, isSuccess, error } =
     api.teacher.getAll.useQuery(undefined, {
       refetchOnWindowFocus: false,
@@ -16,16 +18,43 @@ export const TeacherList: React.FC = () => {
     return <Error error={error.toString()} />;
   } else {
     const teachers: Teacher[] = data;
+
     return (
       <>
-        {teachers.map((teacher: Teacher) => (
-          <TeacherCard
-            fullName={teacher.fullName}
-            id={teacher.id}
-            job={teacher.job}
-          />
-        ))}
+        <input
+          className="flex w-full items-center justify-between rounded-lg border-2 border-solid border-slate-400 px-10 py-5 placeholder-slate-400 focus-visible:text-slate-900"
+          placeholder="Поиск по ФИО"
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+        <TeacherListFiltered search={searchValue} teachers={teachers} />
       </>
     );
   }
+};
+
+type TeacherListFiltered = {
+  teachers: Teacher[];
+  search: string;
+};
+const TeacherListFiltered = ({ teachers, search }: TeacherListFiltered) => {
+  let teachersFiltered: Teacher[] = [];
+  for (let i = 0; i < teachers.length; i++) {
+    const elem = teachers[i];
+    if (elem?.fullName.toLowerCase().includes(search.toLowerCase())) {
+      teachersFiltered.push(elem);
+    }
+  }
+
+  return (
+    <>
+      {teachersFiltered.map((teacher: Teacher) => (
+        <TeacherCard
+          fullName={teacher.fullName}
+          id={teacher.id}
+          job={teacher.job}
+        />
+      ))}
+    </>
+  );
 };

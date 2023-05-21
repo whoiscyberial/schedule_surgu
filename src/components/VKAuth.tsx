@@ -3,8 +3,9 @@ import React from "react";
 
 const VKAuth = () => {
   return (
+    // flex items-center justify-center gap-2 rounded-xl border-2 border-solid border-slate-200 px-8 py-3 font-semibold text-slate-900 no-underline transition hover:bg-slate-300 hover:text-slate-900
     <button
-      className="flex items-center justify-center gap-2 rounded-xl border-2 border-solid border-slate-200 px-8 py-3 font-semibold text-slate-900 no-underline transition hover:bg-slate-300 hover:text-slate-900"
+      className="flex gap-3 font-medium tracking-tight"
       onClick={() => void signIn()}
     >
       <svg
@@ -23,7 +24,6 @@ const VKAuth = () => {
           fill="white"
         />
       </svg>
-      Вход через VK
     </button>
   );
 };
