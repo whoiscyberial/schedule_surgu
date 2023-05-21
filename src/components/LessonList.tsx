@@ -89,7 +89,7 @@ type LessonsByDayProps = {
 };
 
 const LessonsByDay = ({ lessons, day, orderList }: LessonsByDayProps) => {
-  let lessonsFiltered: Lesson[] = [];
+  const lessonsFiltered: Lesson[] = [];
   for (let i = 0; i < lessons.length; i++) {
     const elem = lessons[i];
     if (elem?.day === day) {

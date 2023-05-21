@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { signOut } from "next-auth/react";
 import type { SessionContextValue } from "next-auth/react";
-import Link from "next/link";
 import Image from "next/image";
 
 function classNames(...classes: string[]) {

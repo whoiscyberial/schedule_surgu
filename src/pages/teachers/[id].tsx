@@ -48,8 +48,4 @@ const CardPage = () => {
   }
 };
 
-const Lessons: React.FC = () => {
-  return <div className="flex w-full flex-col gap-4"></div>;
-};
-
 export default CardPage;
