@@ -23,11 +23,13 @@ const Header = () => {
   }
 
   return (
-    <header className=" bg-white">
-      <div className="flex items-center justify-between p-4">
+    <header className="">
+      <div className="flex items-center justify-between">
         <Link href={"/"}>
           {/* <Image src="/blacklogo.png" alt="logo" height={32} width={64} /> */}
-          <p>findyourteacher.</p>
+          <p className="text-lg font-bold tracking-tighter">
+            find<span className="text-purple-600">your</span>teacher.
+          </p>
         </Link>
         <DropdownMenu session={session} />
       </div>
