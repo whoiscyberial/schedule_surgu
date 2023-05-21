@@ -22,7 +22,7 @@ export const LessonList = ({ id }: Props) => {
   } = useForm();
 
   const addNewLesson = api.lesson.add.useMutation();
-  const onSubmit = (data: Record<string, {}>) => {
+  const onSubmit = (data: Record<string, object>) => {
     addNewLesson.mutate({
       // @ts-ignore
       title: data.title, // @ts-ignore
@@ -33,7 +33,7 @@ export const LessonList = ({ id }: Props) => {
       office: data.office, // @ts-ignore
     });
     setTimeout(() => {
-      refetch();
+      void refetch();
     }, 700);
     return;
   };
@@ -288,9 +288,4 @@ const DayTab = ({ text }: DayTabProps) => {
       {text}
     </Tab>
   );
-};
-
-type AddLessonProps = { day: number; id: string };
-const AddLessonProps = ({ day, id }: AddLessonProps) => {
-  return <></>;
 };

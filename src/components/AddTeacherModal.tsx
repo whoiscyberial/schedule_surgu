@@ -19,7 +19,7 @@ export default function ModalVideo({ open, setOpen, refetchFn }: ModalVideo) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: Record<string, {}>) => {
+  const onSubmit = (data: Record<string, object>) => {
     addNewTeacher.mutate({
       // @ts-ignore
       id: data.id, // @ts-ignore
