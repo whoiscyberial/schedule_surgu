@@ -1,12 +1,10 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React from "react";
 import { api } from "../../utils/api";
 import Layout from "../../components/Layout";
 import SpinnerPage from "../../components/SpinnerPage";
-import Link from "next/link";
 import Error from "../../components/Error";
-import { Teacher } from "@prisma/client";
-import { LessonCard } from "~/components/LessonCard";
+import type { Teacher } from "@prisma/client";
 import { LessonList } from "~/components/LessonList";
 
 const CardPage = () => {

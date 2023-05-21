@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import VKAuth from "./VKAuth";
 import { useSession } from "next-auth/react";

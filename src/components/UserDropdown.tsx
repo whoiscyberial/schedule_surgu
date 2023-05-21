@@ -1,9 +1,9 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { signOut } from "next-auth/react";
 import type { SessionContextValue } from "next-auth/react";
 import Link from "next/link";
+import Image from "next/image";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -19,13 +19,13 @@ export default function DropdownMenu({ session }: Props) {
       <div>
         <Menu.Button className="inline-flex w-full items-center justify-center  rounded-md px-3 py-2 ">
           {session.data?.user.image ? (
-            <img
+            <Image
               src={session.data?.user.image}
               alt="profile picture"
               className="h-[48px] w-[48px] rounded-full"
             />
           ) : (
-            <img
+            <Image
               src="https://vk.com/images/camera_50.png"
               alt="profile picture"
               className="h-[64px] w-[64px] rounded-full"
@@ -45,19 +45,6 @@ export default function DropdownMenu({ session }: Props) {
       >
         <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <Link
-                  href="/admin"
-                  className={classNames(
-                    active ? "bg-gray-100 text-slate-900" : "text-gray-700",
-                    "block w-full px-4 py-3 text-left text-sm"
-                  )}
-                >
-                  Админ-панель
-                </Link>
-              )}
-            </Menu.Item>
             <Menu.Item>
               {({ active }) => (
                 <button

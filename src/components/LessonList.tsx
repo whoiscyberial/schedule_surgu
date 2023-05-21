@@ -1,10 +1,8 @@
-import { Lesson, Order, Teacher } from "@prisma/client";
+import type { Lesson, Order } from "@prisma/client";
 import Error from "./Error";
 import SpinnerPage from "./SpinnerPage";
-import { TeacherCard } from "./TeacherCard";
 import { api } from "~/utils/api";
 import { LessonCard } from "./LessonCard";
-import { orderToTime } from "~/utils/orderToTime";
 import { Tab } from "@headlessui/react";
 
 type Props = {
@@ -16,13 +14,12 @@ export const LessonList = ({ id }: Props) => {
     refetchOnWindowFocus: false,
   });
 
-  const { data, isLoading, refetch, isSuccess, error } =
-    api.lesson.getAllByTeacherId.useQuery(
-      { teacherId: id },
-      {
-        refetchOnWindowFocus: false,
-      }
-    );
+  const { data, isLoading, error } = api.lesson.getAllByTeacherId.useQuery(
+    { teacherId: id },
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
   if (isLoading || !data || orderFetch.isLoading || !orderFetch.data) {
     return <SpinnerPage />;
@@ -37,7 +34,7 @@ export const LessonList = ({ id }: Props) => {
     const lessons: Lesson[] = data;
     const orderList: Order[] = orderFetch.data;
 
-    let check = [];
+    const check = [];
     for (let i = 0; i < lessons.length; i++) {
       const elem = lessons[i];
       if (orderList.find((order) => order.order === elem?.order)) {
@@ -104,6 +101,7 @@ const LessonsByDay = ({ lessons, day, orderList }: LessonsByDayProps) => {
     <>
       {lessonsFiltered.map((lesson: Lesson) => (
         <LessonCard
+          key={lesson.id}
           office={lesson.office}
           title={lesson.title}
           timeStart={

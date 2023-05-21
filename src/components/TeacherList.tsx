@@ -1,4 +1,4 @@
-import { Teacher } from "@prisma/client";
+import type { Teacher } from "@prisma/client";
 import Error from "./Error";
 import SpinnerPage from "./SpinnerPage";
 import { TeacherCard } from "./TeacherCard";
@@ -7,10 +7,9 @@ import { useState } from "react";
 
 export const TeacherList: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
-  const { data, isLoading, refetch, isSuccess, error } =
-    api.teacher.getAll.useQuery(undefined, {
-      refetchOnWindowFocus: false,
-    });
+  const { data, isLoading, error } = api.teacher.getAll.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+  });
 
   if (isLoading || !data) {
     return <SpinnerPage />;
@@ -38,7 +37,7 @@ type TeacherListFiltered = {
   search: string;
 };
 const TeacherListFiltered = ({ teachers, search }: TeacherListFiltered) => {
-  let teachersFiltered: Teacher[] = [];
+  const teachersFiltered: Teacher[] = [];
   for (let i = 0; i < teachers.length; i++) {
     const elem = teachers[i];
     if (elem?.fullName.toLowerCase().includes(search.toLowerCase())) {
@@ -50,6 +49,7 @@ const TeacherListFiltered = ({ teachers, search }: TeacherListFiltered) => {
     <>
       {teachersFiltered.map((teacher: Teacher) => (
         <TeacherCard
+          key={teacher.id}
           fullName={teacher.fullName}
           id={teacher.id}
           job={teacher.job}

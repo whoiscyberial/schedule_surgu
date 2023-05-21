@@ -1,14 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
 
-import { api } from "~/utils/api";
 import Layout from "~/components/Layout";
-import { TeacherCard } from "~/components/TeacherCard";
-import SpinnerPage from "~/components/SpinnerPage";
-import { Teacher } from "@prisma/client";
-import Error from "~/components/Error";
 import { TeacherList } from "~/components/TeacherList";
 
 const Home: NextPage = () => {

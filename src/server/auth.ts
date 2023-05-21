@@ -8,7 +8,6 @@ import VkProvider from "next-auth/providers/vk";
 import { PrismaAdapter } from "@next-auth/prisma-adapter/dist/index";
 import { env } from "../env.mjs";
 import { prisma } from "./db";
-import { api } from "../utils/api";
 
 /**
  * Module augmentation for `next-auth` types.
