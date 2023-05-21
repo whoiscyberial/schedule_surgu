@@ -22,7 +22,7 @@ export const TeacherCard = ({
       teacherId: id,
     });
     setTimeout(() => {
-      refetchFn();
+      void refetchFn();
     }, 1200);
     return;
   };

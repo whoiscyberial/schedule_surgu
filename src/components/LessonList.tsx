@@ -144,86 +144,90 @@ export const LessonList = ({ id }: Props) => {
             </Tab.Panel>
           </Tab.Panels>
         </Tab.Group>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="mt-8 w-full space-y-4"
-        >
-          <h2 className="text-center text-lg font-bold">Добавить новую пару</h2>
-          <input
-            {...register("title", { required: true })}
-            className={`w-full rounded-lg border-2 ${
-              errors.title
-                ? "border-red-500 focus-visible:border-red-500"
-                : "border-slate-200"
-            } w-full px-4 py-4 outline-none transition-all focus-visible:border-slate-500 focus-visible:shadow-md focus-visible:shadow-slate-200`}
-            placeholder="Название пары"
-          />
-          <input
-            {...register("type", { required: true })}
-            className={`w-full rounded-lg border-2 ${
-              errors.type
-                ? "border-red-500 focus-visible:border-red-500"
-                : "border-slate-200"
-            } w-full px-4 py-4 outline-none transition-all focus-visible:border-slate-500 focus-visible:shadow-md focus-visible:shadow-slate-200`}
-            placeholder="Назначение пары (Лекция\Практика\Экзамен\Консультация)"
-          />
-          <div className="flex gap-5">
-            <select
-              {...register("day", { required: true })}
-              className="rounded-lg border-2 border-slate-200 px-3 py-3 focus-visible:outline-none md:px-5"
-            >
-              <option value="1" defaultChecked={true}>
-                Пн
-              </option>
-              <option value="2">Вт</option>
-              <option value="3">Ср</option>
-              <option value="4">Чт</option>
-              <option value="5">Пт</option>
-              <option value="6">Сб</option>
-            </select>
-            <select
-              {...register("order", { required: true })}
-              className="rounded-lg border-2 border-slate-200 px-2 py-3 focus-visible:outline-none md:px-5"
-            >
-              <option value="1" defaultChecked={true}>
-                1-ая пара
-              </option>
-              <option value="2">2-ая пара</option>
-              <option value="3">3-я пара</option>
-              <option value="4">4-ая пара</option>
-              <option value="5">5-ая пара</option>
-              <option value="6">6-ая пара</option>
-              <option value="7">7-ая пара</option>
-              <option value="8">8-ая пара</option>
-              <option value="9">9-ая пара</option>
-              <option value="10">10-ая пара</option>
-            </select>
+        {isAdmin && (
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="mt-8 w-full space-y-4"
+          >
+            <h2 className="text-center text-lg font-bold">
+              Добавить новую пару
+            </h2>
             <input
-              {...register("office", { required: true })}
-              className={`rounded-lg border-2 px-4 py-2 ${
-                errors.office
+              {...register("title", { required: true })}
+              className={`w-full rounded-lg border-2 ${
+                errors.title
                   ? "border-red-500 focus-visible:border-red-500"
                   : "border-slate-200"
               } w-full px-4 py-4 outline-none transition-all focus-visible:border-slate-500 focus-visible:shadow-md focus-visible:shadow-slate-200`}
-              placeholder="Кабинет"
+              placeholder="Название пары"
             />
-          </div>
-          {(errors.title ||
-            errors.type ||
-            errors.day ||
-            errors.order ||
-            errors.office) && (
-            <span className="inline-block rounded-lg  p-2 text-red-500">
-              Пожалуйста, заполните все поля
-            </span>
-          )}
-          <button
-            type="submit"
-            className="w-full rounded-lg bg-slate-800 px-4 py-4 font-medium text-white transition-all hover:bg-slate-900 "
-          >
-            Добавить
-          </button>
-        </form>
+            <input
+              {...register("type", { required: true })}
+              className={`w-full rounded-lg border-2 ${
+                errors.type
+                  ? "border-red-500 focus-visible:border-red-500"
+                  : "border-slate-200"
+              } w-full px-4 py-4 outline-none transition-all focus-visible:border-slate-500 focus-visible:shadow-md focus-visible:shadow-slate-200`}
+              placeholder="Назначение пары (Лекция\Практика\Экзамен\Консультация)"
+            />
+            <div className="flex gap-5">
+              <select
+                {...register("day", { required: true })}
+                className="rounded-lg border-2 border-slate-200 px-3 py-3 focus-visible:outline-none md:px-5"
+              >
+                <option value="1" defaultChecked={true}>
+                  Пн
+                </option>
+                <option value="2">Вт</option>
+                <option value="3">Ср</option>
+                <option value="4">Чт</option>
+                <option value="5">Пт</option>
+                <option value="6">Сб</option>
+              </select>
+              <select
+                {...register("order", { required: true })}
+                className="rounded-lg border-2 border-slate-200 px-2 py-3 focus-visible:outline-none md:px-5"
+              >
+                <option value="1" defaultChecked={true}>
+                  1-ая пара
+                </option>
+                <option value="2">2-ая пара</option>
+                <option value="3">3-я пара</option>
+                <option value="4">4-ая пара</option>
+                <option value="5">5-ая пара</option>
+                <option value="6">6-ая пара</option>
+                <option value="7">7-ая пара</option>
+                <option value="8">8-ая пара</option>
+                <option value="9">9-ая пара</option>
+                <option value="10">10-ая пара</option>
+              </select>
+              <input
+                {...register("office", { required: true })}
+                className={`rounded-lg border-2 px-4 py-2 ${
+                  errors.office
+                    ? "border-red-500 focus-visible:border-red-500"
+                    : "border-slate-200"
+                } w-full px-4 py-4 outline-none transition-all focus-visible:border-slate-500 focus-visible:shadow-md focus-visible:shadow-slate-200`}
+                placeholder="Кабинет"
+              />
+            </div>
+            {(errors.title ||
+              errors.type ||
+              errors.day ||
+              errors.order ||
+              errors.office) && (
+              <span className="inline-block rounded-lg  p-2 text-red-500">
+                Пожалуйста, заполните все поля
+              </span>
+            )}
+            <button
+              type="submit"
+              className="w-full rounded-lg bg-slate-800 px-4 py-4 font-medium text-white transition-all hover:bg-slate-900 "
+            >
+              Добавить
+            </button>
+          </form>
+        )}
       </>
     );
   }

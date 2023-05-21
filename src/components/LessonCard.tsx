@@ -29,7 +29,7 @@ export const LessonCard = ({
       id: id,
     });
     setTimeout(() => {
-      refetchFn();
+      void refetchFn();
     }, 500);
     return;
   };

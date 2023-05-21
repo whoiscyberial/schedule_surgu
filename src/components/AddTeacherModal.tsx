@@ -30,7 +30,7 @@ export default function ModalVideo({ open, setOpen, refetchFn }: ModalVideo) {
     });
     setOpen(false);
     setTimeout(() => {
-      refetchFn();
+      void refetchFn();
     }, 700);
     return;
   };
