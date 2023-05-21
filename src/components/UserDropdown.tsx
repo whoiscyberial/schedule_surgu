@@ -18,13 +18,13 @@ export default function DropdownMenu({ session }: Props) {
       <div>
         <Menu.Button className="inline-flex w-full items-center justify-center  rounded-md px-3 py-2 ">
           {session.data?.user.image ? (
-            <Image
+            <img
               src={session.data?.user.image}
               alt="profile picture"
               className="h-[48px] w-[48px] rounded-full"
             />
           ) : (
-            <Image
+            <img
               src="https://vk.com/images/camera_50.png"
               alt="profile picture"
               className="h-[64px] w-[64px] rounded-full"

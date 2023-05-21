@@ -11,7 +11,7 @@ export const lessonRouter = createTRPCRouter({
           day: z.number(),
           type: z.string(),
           office: z.string().max(10),
-          order: z.number().positive().int().max(1).gte(1),
+          order: z.number().positive().int().gte(1),
           teacherId: z.string(),
         })
         .required()
