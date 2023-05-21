@@ -170,20 +170,20 @@ export const LessonList = ({ id }: Props) => {
           <div className="flex gap-5">
             <select
               {...register("day", { required: true })}
-              className="rounded-lg border-2 border-slate-200 px-5 py-3 focus-visible:outline-none"
+              className="rounded-lg border-2 border-slate-200 px-3 py-3 focus-visible:outline-none md:px-5"
             >
               <option value="1" defaultChecked={true}>
-                Понедельник
+                Пн
               </option>
-              <option value="2">Вторник</option>
-              <option value="3">Среда</option>
-              <option value="4">Четверг</option>
-              <option value="5">Пятница</option>
-              <option value="6">Суббота</option>
+              <option value="2">Вт</option>
+              <option value="3">Ср</option>
+              <option value="4">Чт</option>
+              <option value="5">Пт</option>
+              <option value="6">Сб</option>
             </select>
             <select
               {...register("order", { required: true })}
-              className="rounded-lg border-2 border-slate-200 px-5 py-3 focus-visible:outline-none"
+              className="rounded-lg border-2 border-slate-200 px-2 py-3 focus-visible:outline-none md:px-5"
             >
               <option value="1" defaultChecked={true}>
                 1-ая пара
@@ -282,7 +282,7 @@ const DayTab = ({ text }: DayTabProps) => {
   return (
     <Tab
       className={
-        "mx-3 rounded-lg border-2 border-slate-200 p-3 text-lg font-medium transition-all ui-selected:-translate-y-1 ui-selected:bg-slate-200 ui-selected:font-bold ui-selected:shadow-md"
+        "mx-1 rounded-lg border-2 border-slate-200 p-3 text-lg font-medium transition-all ui-selected:-translate-y-1 ui-selected:bg-slate-200 ui-selected:font-bold md:mx-3 "
       }
     >
       {text}

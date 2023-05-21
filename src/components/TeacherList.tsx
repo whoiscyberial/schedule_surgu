@@ -38,14 +38,24 @@ export const TeacherList: React.FC = () => {
             onChange={(e) => setSearchValue(e.target.value)}
           />
           {isAdmin && (
-            <button
-              onClick={() => setOpen(true)}
-              className="w-1/3 items-center justify-between rounded-lg border-2 border-solid border-slate-400 px-7 py-5 transition-all hover:bg-slate-200 focus-visible:text-slate-900"
-            >
-              <p className="line-clamp-1 font-medium text-slate-800">
-                Добавить преподавателя
-              </p>
-            </button>
+            <>
+              <button
+                onClick={() => setOpen(true)}
+                className="hidden w-1/3 items-center justify-between rounded-lg border-2 border-solid border-slate-400 px-7 py-5 transition-all hover:bg-slate-200 focus-visible:text-slate-900 md:flex"
+              >
+                <p className="w-full text-center font-medium text-slate-800 lg:line-clamp-1">
+                  Добавить преподавателя
+                </p>
+              </button>
+              <button
+                onClick={() => setOpen(true)}
+                className="w-1/5 items-center justify-between rounded-lg border-2 border-solid border-slate-400 px-7 py-5 transition-all hover:bg-slate-200 focus-visible:text-slate-900 md:hidden "
+              >
+                <p className="w-full text-center font-medium text-slate-800 lg:line-clamp-1">
+                  +
+                </p>
+              </button>
+            </>
           )}
         </div>
         <TeacherListFiltered
