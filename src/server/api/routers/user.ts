@@ -14,17 +14,4 @@ export const userRouter = createTRPCRouter({
     });
     return vkAccount;
   }),
-
-  changeEmail: adminProcedure
-    .input(z.object({ id: z.string(), email: z.string().email() }).required())
-    .mutation(async ({ ctx, input }) => {
-      return await ctx.prisma.user.update({
-        where: {
-          id: input.id,
-        },
-        data: {
-          email: input.email,
-        },
-      });
-    }),
 });

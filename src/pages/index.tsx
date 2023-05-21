@@ -5,6 +5,12 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "~/utils/api";
 import Layout from "~/components/Layout";
+import { TeacherCard } from "~/components/TeacherCard";
+import SpinnerPage from "~/components/SpinnerPage";
+import { Teacher } from "@prisma/client";
+import Error from "~/components/Error";
+import { TeacherList } from "~/components/TeacherList";
+import { Search } from "~/components/Search";
 
 const Home: NextPage = () => {
   return (
@@ -21,9 +27,7 @@ const Home: NextPage = () => {
         <div className="flex min-h-screen w-full flex-col items-center gap-5">
           <h1 className="text-2xl font-extrabold">Расписание преподавателей</h1>
           <Search />
-          <TeacherCard />
-          <TeacherCard />
-          <TeacherCard />
+          <TeacherList />
         </div>
       </Layout>
     </>
@@ -31,29 +35,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-
-const Search: React.FC = () => {
-  return (
-    <input
-      className="flex w-full items-center justify-between rounded-lg border-2 border-solid border-slate-400 px-10 py-5 placeholder-slate-400 focus-visible:text-slate-900"
-      placeholder="Поиск по ФИО"
-    />
-  );
-};
-
-const TeacherCard: React.FC = () => {
-  return (
-    <Link
-      href={"./teachers/1"}
-      className="flex w-full items-center justify-between rounded-lg border-2 border-solid border-slate-200 bg-slate-50 p-10 transition-all hover:bg-slate-200 active:bg-slate-300"
-    >
-      <div>
-        <h3 className="text-lg font-bold text-slate-900">
-          Щипицин Константин Павлович
-        </h3>
-        <h4 className="text-slate-500">Канд. физ.-мат. наук, доцент</h4>
-      </div>
-      <p>{"-->"}</p>
-    </Link>
-  );
-};
