@@ -5,6 +5,7 @@ import { TeacherCard } from "./TeacherCard";
 import { api } from "~/utils/api";
 import { LessonCard } from "./LessonCard";
 import { orderToTime } from "~/utils/orderToTime";
+import { Tab } from "@headlessui/react";
 
 type Props = {
   id: string;
@@ -17,7 +18,7 @@ export const LessonList = ({ id }: Props) => {
 
   const { data, isLoading, refetch, isSuccess, error } =
     api.lesson.getAllByTeacherId.useQuery(
-      { id: id },
+      { teacherId: id },
       {
         refetchOnWindowFocus: false,
       }
@@ -35,7 +36,6 @@ export const LessonList = ({ id }: Props) => {
   } else {
     const lessons: Lesson[] = data;
     const orderList: Order[] = orderFetch.data;
-    const order = orderToTime(orderList);
 
     let check = [];
     for (let i = 0; i < lessons.length; i++) {
@@ -51,23 +51,85 @@ export const LessonList = ({ id }: Props) => {
     }
 
     return (
-      <>
-        {lessons.map((lesson: Lesson) => (
-          <LessonCard
-            office={lesson.office}
-            title={lesson.title}
-            timeStart={
-              // @ts-ignore
-              orderList.find((order) => order.order === lesson.order).timeStart
-            }
-            timeEnd={
-              //@ts-ignore
-              orderList.find((order) => order.order === lesson.order).timeEnd
-            }
-            type={lesson.type}
-          />
-        ))}
-      </>
+      <Tab.Group>
+        <Tab.List>
+          <DayTab text="Пн" />
+          <DayTab text="Вт" />
+          <DayTab text="Ср" />
+          <DayTab text="Чт" />
+          <DayTab text="Пт" />
+          <DayTab text="Сб" />
+        </Tab.List>
+        <Tab.Panels className={"mt-4 w-full"}>
+          <Tab.Panel>
+            <LessonsByDay lessons={lessons} day={1} orderList={orderList} />
+          </Tab.Panel>
+          <Tab.Panel>
+            <LessonsByDay lessons={lessons} day={2} orderList={orderList} />
+          </Tab.Panel>
+          <Tab.Panel>
+            <LessonsByDay lessons={lessons} day={3} orderList={orderList} />
+          </Tab.Panel>
+          <Tab.Panel>
+            <LessonsByDay lessons={lessons} day={4} orderList={orderList} />
+          </Tab.Panel>
+          <Tab.Panel>
+            <LessonsByDay lessons={lessons} day={5} orderList={orderList} />
+          </Tab.Panel>
+          <Tab.Panel>
+            <LessonsByDay lessons={lessons} day={6} orderList={orderList} />
+          </Tab.Panel>
+        </Tab.Panels>
+      </Tab.Group>
     );
   }
+};
+
+type LessonsByDayProps = {
+  lessons: Lesson[];
+  day: number;
+  orderList: Order[];
+};
+
+const LessonsByDay = ({ lessons, day, orderList }: LessonsByDayProps) => {
+  let lessonsFiltered: Lesson[] = [];
+  for (let i = 0; i < lessons.length; i++) {
+    const elem = lessons[i];
+    if (elem?.day === day) {
+      lessonsFiltered.push(elem);
+    }
+  }
+
+  return (
+    <>
+      {lessonsFiltered.map((lesson: Lesson) => (
+        <LessonCard
+          office={lesson.office}
+          title={lesson.title}
+          timeStart={
+            // @ts-ignore
+            orderList.find((order) => order.order === lesson.order).timeStart
+          }
+          timeEnd={
+            //@ts-ignore
+            orderList.find((order) => order.order === lesson.order).timeEnd
+          }
+          type={lesson.type}
+        />
+      ))}
+    </>
+  );
+};
+
+type DayTabProps = { text: string };
+const DayTab = ({ text }: DayTabProps) => {
+  return (
+    <Tab
+      className={
+        "mx-3 rounded-lg border-2 border-slate-200 p-3 text-lg font-medium transition-all ui-selected:-translate-y-1 ui-selected:bg-slate-200 ui-selected:font-bold ui-selected:shadow-md"
+      }
+    >
+      {text}
+    </Tab>
+  );
 };

@@ -24,11 +24,11 @@ export const teacherRouter = createTRPCRouter({
     }),
 
   delete: adminProcedure
-    .input(z.object({ id: z.string() }).required())
+    .input(z.object({ teacherId: z.string() }).required())
     .mutation(async ({ ctx, input }) => {
       return await ctx.prisma.teacher.delete({
         where: {
-          id: input.id,
+          id: input.teacherId,
         },
       });
     }),

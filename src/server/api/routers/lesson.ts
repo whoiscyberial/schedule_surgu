@@ -12,6 +12,7 @@ export const lessonRouter = createTRPCRouter({
           type: z.string(),
           office: z.string().max(10),
           order: z.number().positive().int().max(1).gte(1),
+          teacherId: z.string(),
         })
         .required()
     )
@@ -23,15 +24,16 @@ export const lessonRouter = createTRPCRouter({
           office: input.office,
           day: input.day,
           order: input.order,
+          teacherId: input.teacherId,
         },
       });
     }),
 
   getAllByTeacherId: publicProcedure
-    .input(z.object({ id: z.string() }).required())
+    .input(z.object({ teacherId: z.string() }).required())
     .query(async ({ input, ctx }) => {
       const lessons = await ctx.prisma.lesson.findMany({
-        where: { id: input.id },
+        where: { teacherId: input.teacherId },
       });
       return lessons;
     }),

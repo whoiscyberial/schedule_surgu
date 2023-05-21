@@ -14,7 +14,7 @@ export const LessonCard = ({
   office,
 }: Props) => {
   return (
-    <div className="flex w-full items-center justify-between rounded-lg border-2 border-solid border-slate-200 bg-slate-50 px-10 py-8 transition-all">
+    <div className="my-2 flex w-full items-center justify-between rounded-lg border-2 border-solid border-slate-200 bg-slate-50 px-10 py-8 transition-all">
       <div>
         <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
         <h4 className="text-slate-400">{type}</h4>
